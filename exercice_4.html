@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercice 4</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <style>
+        h1,h2 {
+            margin: 0;
+            padding: 0;
+        }
+        body > .content {
+            margin: auto;
+            width: 50%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        body > .content > form > div {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            margin: 10px 0 20px 0;
+        }
+
+        body > .content > form > div > input {
+            padding: 5px;
+            border-radius: 3px;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+        }
+
+        body > .content > form > div > label {
+            font-family: Courier, sans-serif;
+            font-size: 0.85em;
+        }
+
+        body > .content > .card-content {
+            display: flex;
+            align-content: center;
+            justify-content: center;
+            height: 100%;
+        }
+
+        body > .content > .card-content > .card {
+            min-width: 320px;
+            max-width: 450px;
+            min-height: 180px;
+            height: fit-content;
+            box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.25);
+        }
+
+        body > .content > .card-content > .card > .header {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5px;
+        }
+
+        body > .content > .card-content > .card > .header > img {
+            height: 100%;
+        }
+
+        body > .content > .card-content > .card > .header > div {
+            font-family: Courier, Avenir, Helvetica, Arial, sans-serif;
+            font-weight: 700;
+            font-size: .9em;
+            text-align: right;
+        }
+
+        body > .content > .card-content > .card > .content {
+            text-align: center;
+            font-family: Courier, Avenir, Helvetica, Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+
+<div class="content" id="root">
+
+    <form>
+        <div class="input-group">
+            <label>Nick name</label>
+            <input type="text" v-model="nickname">
+        </div>
+        <div class="input-group">
+            <label>Nom complet <sub>(sera re-formatté)</sub></label>
+            <input type="text" v-model="name">
+        </div>
+        <div class="input-group">
+            <label>Adresse</label>
+            <input type="text" v-model="address">
+        </div>
+        <div class="input-group">
+            <label>Pays</label>
+            <select v-model="selectedIndex">
+                <option v-for="(data, index) in countries" :key="data.name" :value="index">
+                    {{ data.name }}
+                </option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label>Téléphone</label>
+            <input type="text" v-model="tel">
+        </div>
+    </form>
+
+    <div class="card-content">
+
+        <div class="card">
+            <div class="header">
+                <img src="baseline_face_black_48dp.png" alt="visage"/>
+                <div>
+                <h1>{{ nickname }}</h1>
+                <h2>{{ name }}</h2>
+                </div>
+            </div>
+            <div class="content">
+                <p>{{ address }}</p>
+            </div>
+            <div class="content">
+                <p>{{ country }}</p>
+            </div>
+            <div class="content">
+                <p>{{ phone_number }}</p>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    const data = [
+        {
+            "name": "France",
+            "callingCodes": ["33"]
+        },
+        {
+            "name": "Belgium",
+            "callingCodes": ["32"]
+        },
+        {
+            "name": "Germany",
+            "callingCodes": ["49"]
+        },
+        {
+            "name": "United States of America",
+            "callingCodes": ["1"],
+        },
+    ]
+
+    const exercice4 = {
+        data() {
+            return {
+                nickname: 'Goon',
+                name: '',
+                address: '666 Highway to Hell',
+                selectedIndex: 0,
+                tel: '7 45 62 74 12',
+                countries: data,
+            }
+        },
+        computed: {
+            country() {
+                return this.countries[this.selectedIndex].name;
+            },
+            phone_number() {
+                return "(+" + this.countries[this.selectedIndex].callingCodes[0] + ") " + this.tel;
+            }
+        }
+    }
+
+    Vue.createApp(exercice4).mount('#root');
+</script>
+
+</body>
+</html>

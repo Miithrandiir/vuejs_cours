@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>table</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+          crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/vue@next"></script>
+
+</head>
+<div id="app-computed">
+  <div class="form-group">
+    <label for="app-computed-msg">Message</label>
+    <input v-model="message" type="text" class="form-control" id="app-computed-msg">
+  </div>
+  <div class="form-group">
+    <label for="app-computed-limit">Short message limit</label>
+    <input v-model="short_limit" type="text" class="form-control" id="app-computed-limit">
+  </div>
+
+  <div class="console_output">
+    <div>Message : {{ message }}</div>
+    <div>Type : {{ size }}</div>
+  </div>
+</div>
+
+<script>
+  Vue.createApp({
+    data(){return{
+      message: 'Hello World',
+      short_limit: 5
+    }},
+    computed: {
+      size(){
+        if (this.message.length < this.short_limit){
+          return 'short'
+        }else{
+          return 'long'
+        }
+
+        // Ok ... on aurait pu faire ;)
+        // return this.message.length < this.short_limit ? 'short' : 'long'
+      }
+    }
+  }).mount("#app-computed")
+</script>
+</html>
