@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .app-10-basic{
+            background: black;
+            height: auto;
+        }
+        .app-10-hilighted{
+            color: greenyellow;
+            font-weight: bolder;
+        }
+        .biiig{
+            font-size: 2em;
+            text-transform: capitalize;
+        }
+    </style>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <div id="app-10">
+        <fieldset>
+            <legend>Class tester</legend>
+            <div style="display: flex; flex-direction: row">
+                <div class="form-group">
+                    <label class="form-check-label" for="app-10-c1">Hilighted</label>&nbsp;
+                    <input v-model="hilighted" type="checkbox" class="form-check-input" id="app-10-c1">
+                </div>
+                <div style="width: 50px"></div>
+                <div class="form-group">
+                    <label class="form-check-label" for="app-10-c2">Big</label>&nbsp;
+                    <input v-model="big" type="checkbox" class="form-check-input" id="app-10-c2">
+                </div>
+            </div>
+        </fieldset>
+
+        <div :class="{'app-10-hilighted':hilighted, biiig: big}" class="app-10-basic form-control">
+            Un div qui a du style
+        </div>
+
+    </div>
+
+<script>
+    Vue.createApp({
+        data(){
+            return {
+                hilighted: true,
+                big: false
+            }
+        }
+    }).mount('#app-10')
+</script>
+</body>
+</html>

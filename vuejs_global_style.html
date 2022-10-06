@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+            crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue@next"></script>
+
+</head>
+<body>
+<div id="root">
+    <div class="container-md">
+        <h1>Global Style tester</h1>
+        <hr>
+        <form>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Enter style here" aria-describedby="button-addon2"
+                       v-model="custom_style">
+                <button class="btn btn-warning" type="button" id="button-addon2">clear</button>
+            </div>
+        </form>
+
+        <div v-bind:style="custom_style">
+            Un div qui a du style grâce à "v-bind"
+        </div>
+        <br/>
+        <div :style="custom_style">
+            Un div qui a du style grâce à ":"
+        </div>
+    </div>
+</div>
+<script>
+
+
+    Vue.createApp({
+        data() {
+            return {
+                custom_style: ''
+            }
+        }
+    }).mount('#root');
+</script>
+</body>
+</html>

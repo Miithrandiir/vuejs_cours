@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.JS</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <div id="app-01">
+        {{ message_01 }}
+        <br/>
+        {{ message_02 }}
+        <div v-html="message_html"></div>
+    </div>
+
+    <script>
+        const Application_01 = {
+            data() {
+                return {
+                    message_01: 'Vue.JS vous dit bonjour',
+                    message_02: 'C\'est cool',
+                    message_html: '<b style="color: blue;">Vue.JS vous dit bonjour !!</b>'
+                }
+            }
+        }
+
+        Vue.createApp(Application_01).mount('#app-01');
+    </script>
+</body>
+</html>

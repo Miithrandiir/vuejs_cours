@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vuejs if</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+<div id="app-06" style="height: 5em">
+    <label for="app-06">Visible</label>
+    <input type="checkbox" v-model="visible" id="input"/>
+
+    <div v-if="visible" style="margin: 10px 0; background: greenyellow">
+        Ce div risque de disparaître ...
+    </div>
+</div>
+
+
+<script>
+    const App_06 = {
+        data(){
+            return {
+                visible: true
+            }
+        }
+    }
+    Vue.createApp(App_06).mount('#app-06');
+</script>
+</body>
+</html>

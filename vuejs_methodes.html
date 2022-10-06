@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue.js</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <div id="app-methods">
+        <div>
+            {{ mirror(message) }}
+        </div>
+    </div>
+
+    <script>
+
+        const Application_Methods = {
+            data() {
+                return {
+                    message: 'Hello World'
+                }
+            },
+            methods: {
+                decorate(txt) {
+                    return "-->" + txt + "<--";
+                },
+                mirror(txt) {
+                    txt = txt.split('').reverse().join('')
+                    txt = this.decorate(txt)
+                    return txt
+                }
+            }
+        }
+
+        Vue.createApp(Application_Methods).mount('#app-methods')
+
+    </script>
+
+</body>
+</html>

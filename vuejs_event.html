@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.js</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <div id="app-02">
+        Prénom: {{ firstname }}<br/>
+        Nom: {{ lastname }}<br/><br/>
+        <button v-on:click="remplirText">Remplir</button>
+    </div>
+
+    <script>
+        const App_02 = {
+            data(){
+                return {
+                    firstname: '',
+                    lastname: ''
+                }
+            },
+            methods: {
+                remplirText() {
+                    this.firstname = 'John';
+                    this.lastname = 'Doe'.toUpperCase();
+                }
+            }
+        }
+        Vue.createApp(App_02).mount('#app-02')
+    </script>
+</body>
+</html>

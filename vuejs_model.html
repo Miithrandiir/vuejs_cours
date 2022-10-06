@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.JS Model</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+<div id="app-05" style="display: flex; flex-direction: column">
+    <input type="text" v-model="text" placeholder="Votre texte ici"/>
+
+    <div style="margin: 10px 0 ; border-radius: 3px ; padding: 5px ; background: black ; color: greenyellow">
+        <fieldset>
+            <legend style="color: greenyellow">StyliZator</legend>
+            <table>
+                <tr>
+                    <td>original</td>
+                    <td> > </td>
+                    <td> {{ text }}</td>
+                </tr>
+                <tr>
+                    <td>upper-case</td>
+                    <td> > </td>
+                    <td> {{ text.toUpperCase() }}</td>
+                </tr>
+                <tr>
+                    <td>lower-case</td>
+                    <td> > </td>
+                    <td> {{ text.toLowerCase() }}</td>
+                </tr>
+                <tr>
+                    <td>reverse</td>
+                    <td> > </td>
+                    <td> {{ text.split('').reverse().join('') }}</td>
+                </tr>
+            </table>
+        </fieldset>
+    </div>
+
+    <div><button @click="this.text = ''">Clear</button></div>
+
+</div>
+
+<script>
+    const App_05 = {
+        data() {
+            return {
+                text: ''
+            }
+        }
+    }
+
+    Vue.createApp(App_05).mount('#app-05')
+</script>
+</body>
+</html>

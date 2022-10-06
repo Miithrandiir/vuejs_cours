@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vuejs if</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <div id="app-04" style="height: 5em">
+        <button @click="toggleVisibility"> Visible : {{ visible }}</button>
+
+        <div v-if="visible" style="margin: 10px 0; background: greenyellow">
+            Ce div risque de disparaître ...
+        </div>
+    </div>
+
+
+    <script>
+        const App_04 = {
+            data(){
+                return {
+                    visible: true
+                }
+            },
+            methods: {
+                toggleVisibility() {
+                    this.visible = !this.visible;
+                }
+            }
+        }
+        Vue.createApp(App_04).mount('#app-04');
+    </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+<div id="app-07">
+    Weather Forecasts:
+    <ul>
+        <li v-for="(fc, index) in forecasts" :key="fc.name">
+            (day {{index+1}}) <b>{{fc.day}}:</b><i>{{fc.weather}}</i>
+        </li>
+    </ul>
+
+    <button @click="calm_down">Sunshine</button>
+</div>
+
+<script>
+    const App_07 = {
+        data() {
+            return {
+                forecasts: [
+                    {day: 'monday', weather: 'sun'},
+                    {day: 'tuesday', weather: 'clouds'},
+                    {day: 'wednesday', weather: 'rain'},
+                    {day: 'friday', weather: 'storm'},
+                    {day: 'thursday', weather: 'ice'},
+                    {day: 'saturday', weather: 'snow'},
+                    {day: 'sunday', weather: 'armageddon'}
+                ]
+            }
+        },
+        methods: {
+            calm_down() {
+                console.log(this.forecasts.length);
+                this.forecasts[this.forecasts.length-1].weather = 'SUUUUUNNNYYY !'
+            }
+        }
+    }
+
+    Vue.createApp(App_07).mount('#app-07');
+</script>
+</body>
+</html>

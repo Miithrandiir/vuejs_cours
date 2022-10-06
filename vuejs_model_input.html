@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vuejs if</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <div id="input-v-model">
+        <input v-model="text"/> {{text}}
+    </div>
+
+    <script>
+        Vue.createApp({
+            data(){return{
+                text: 'TEST'
+            }}
+        }).mount('#input-v-model')
+    </script>
+</body>
+</html>

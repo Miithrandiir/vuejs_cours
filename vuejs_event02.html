@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.js</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+<div id="app-03">
+    Prénom: {{ firstname }}<br/>
+    Nom: {{ lastname }}<br/><br/>
+    <button
+            @click="remplirText"
+            @mouseenter="changeTxtBtn('Allez clique !')"
+            @mouseout="changeTxtBtn('Revieeens', $event)">
+        {{ btn_txt }}
+    </button>
+    (clicks: {{ nb_click }})
+</div>
+
+<script>
+    const App_02 = {
+        data(){
+            return {
+                firstname: '',
+                lastname: '',
+                btn_txt: 'Remplir',
+                nb_click: 0,
+            }
+        },
+        methods: {
+            remplirText() {
+                this.firstname = 'John';
+                this.lastname = 'Doe'.toUpperCase();
+                this.nb_click++;
+            },
+            changeTxtBtn(str, event) {
+                this.btn_txt = str;
+
+                event.target.style.color = 'red';
+            }
+        }
+    }
+    Vue.createApp(App_02).mount('#app-03')
+</script>
+</body>
+</html>
