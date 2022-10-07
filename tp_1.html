@@ -124,7 +124,7 @@
         </div>
         <div class="input-group">
             <label>Téléphone</label>
-            <input type="text" v-model="tel" maxlength="9" :class="{'error':isTelInError}">
+            <input type="text" @input="e => tel_changed(e)" v-bind:value="tel" maxlength="9" :class="{'error':isTelInError}">
             <div class="error-msg" v-if="isTelInError">Doit comporter 9 chiffres</div>
 
         </div>
@@ -204,6 +204,22 @@
         methods: {
             tel_formated() {
                 return "(+" + this.countries[this.selectedIndex].callingCodes[0] + ") " + this.tel;
+            },
+            tel_changed(event) {
+                let data = event.data
+                console.log(data);
+                if(data === null){
+                    this.tel = " ";
+                    this.tel = "";
+                    return;
+                }
+                data = data.replaceAll(/[^0-9]*/g, "");
+                if(data === "") {
+                    this.tel = " ";
+                    this.tel = "";
+                    return;
+                }
+                this.tel += data;
             }
         }
     }
