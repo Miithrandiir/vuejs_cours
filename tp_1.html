@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <title>TP 1</title>
     <script src="https://unpkg.com/vue@next"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+            crossorigin="anonymous"></script>
     <style>
         h1, h2 {
             margin: 0;
@@ -18,18 +23,26 @@
             margin: auto;
             width: 50%;
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
+            justify-content: center;
             align-items: center;
         }
 
-        body > .content > form > div {
+        body>.content>#data{
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            justify-content: space-between;
+            align-items: center;
+        }
+        body > .content > #data > form > div {
             display: flex;
             flex-direction: column;
             width: 100%;
             margin: 10px 0 20px 0;
         }
 
-        body > .content > form > div > input, select {
+        body > .content > #data >form > div > input, select {
             padding: 8px;
             border-radius: 3px;
             border: 1px solid rgba(0, 0, 0, 0.2);
@@ -37,19 +50,19 @@
             position: relative;
         }
 
-        body > .content > form > div > label {
+        body > .content > #data > form > div > label {
             font-family: Courier, sans-serif;
             font-size: 0.85em;
         }
 
-        body > .content > .card-content {
+        body > .content > #data > .card-content {
             display: flex;
             align-content: center;
             justify-content: center;
             height: 100%;
         }
 
-        body > .content > .card-content > .card {
+        body > .content > #data > .card-content > .card {
             min-width: 320px;
             max-width: 450px;
             min-height: 180px;
@@ -57,7 +70,7 @@
             box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.25);
         }
 
-        body > .content > .card-content > .card > .header {
+        body > .content > #data> .card-content > .card > .header {
             display: flex;
             flex-direction: row;
             justify-content: space-between;
@@ -65,22 +78,22 @@
             padding: 0 5px;
         }
 
-        body > .content > .card-content > .card > .header > h2 {
+        body > .content > #data > .card-content > .card > .header > h2 {
             font-weight: 400;
         }
 
-        body > .content > .card-content > .card > .header > img {
+        body > .content > #data > .card-content > .card > .header > img {
             height: 100%;
         }
 
-        body > .content > .card-content > .card > .header > div {
+        body > .content > #data > .card-content > .card > .header > div {
             font-family: Courier, Avenir, Helvetica, Arial, sans-serif;
             font-weight: 700;
             font-size: .9em;
             text-align: right;
         }
 
-        body > .content > .card-content > .card > .content {
+        body > .content > #data > .card-content > .card > .content {
             text-align: center;
             font-family: Courier, Avenir, Helvetica, Arial, sans-serif;
         }
@@ -99,58 +112,84 @@
 
 <h1>User Information</h1>
 <div class="content" id="root">
-    <form>
-        <div class="input-group">
-            <label>Nick name</label>
-            <input type="text" v-model="nickname" :class="{'error':isNicknameInError}">
-            <div class="error-msg" v-if="isNicknameInError">Ne doit pas être vide</div>
-        </div>
-        <div class="input-group">
-            <label>Nom complet <sub>(sera re-formatté)</sub></label>
-            <input type="text" v-model="name" :class="{'error':isNameInError}">
-            <div class="error-msg" v-if="isNameInError">Format: "prénom nom"</div>
-        </div>
-        <div class="input-group">
-            <label>Adresse</label>
-            <input type="text" v-model="address">
-        </div>
-        <div class="input-group">
-            <label>Pays</label>
-            <select v-model="selectedIndex">
-                <option v-for="(data, index) in get_countries()" :key="data.name" :value="index">
-                    {{ data.name }}
-                </option>
-            </select>
-        </div>
-        <div class="input-group">
-            <label>Téléphone</label>
-            <input type="text" @input="e => tel_changed(e)" v-bind:value="tel" maxlength="9" :class="{'error':isTelInError}">
-            <div class="error-msg" v-if="isTelInError">Doit comporter 9 chiffres</div>
+    <div id="data">
+        <form>
+            <div class="input-group">
+                <label>Nick name</label>
+                <input type="text" v-model="nickname" :class="{'error':isNicknameInError}">
+                <div class="error-msg" v-if="isNicknameInError">Ne doit pas être vide</div>
+            </div>
+            <div class="input-group">
+                <label>Nom complet <sub>(sera re-formatté)</sub></label>
+                <input type="text" v-model="name" :class="{'error':isNameInError}">
+                <div class="error-msg" v-if="isNameInError">Format: "prénom nom"</div>
+            </div>
+            <div class="input-group">
+                <label>Adresse</label>
+                <input type="text" v-model="address">
+            </div>
+            <div class="input-group">
+                <label>Pays</label>
+                <select v-model="selectedIndex">
+                    <option v-for="(data, index) in get_countries()" :key="data.name" :value="index">
+                        {{ data.name }}
+                    </option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>Téléphone</label>
+                <input type="text" @input="e => tel_changed(e)" v-bind:value="tel" maxlength="9"
+                       :class="{'error':isTelInError}">
+                <div class="error-msg" v-if="isTelInError">Doit comporter 9 chiffres</div>
 
-        </div>
-    </form>
+            </div>
+        </form>
 
-    <div class="card-content">
+        <div class="card-content">
 
-        <div class="card">
-            <div class="header">
-                <img src="baseline_face_black_48dp.png" alt="visage"/>
-                <div>
-                    <h1>{{ nickname }}</h1>
-                    <h2>{{ name }}</h2>
+            <div class="card">
+                <div class="header">
+                    <img src="baseline_face_black_48dp.png" alt="visage"/>
+                    <div>
+                        <h1>{{ nickname }}</h1>
+                        <h2>{{ name }}</h2>
+                    </div>
+                </div>
+                <div class="content">
+                    <p>{{ address }}</p>
+                </div>
+                <div class="content">
+                    <p>{{ country }}</p>
+                </div>
+                <div class="content">
+                    <p>{{ tel_formated() }}</p>
                 </div>
             </div>
-            <div class="content">
-                <p>{{ address }}</p>
-            </div>
-            <div class="content">
-                <p>{{ country }}</p>
-            </div>
-            <div class="content">
-                <p>{{ tel_formated() }}</p>
+
+        </div>
+    </div>
+
+
+<div class="list-btn">
+    <button type="button" class="btn btn-primary" @click="save" :disabled="isBtnDisabled">Enregistrer</button>
+    <button type="button" class="btn btn-secondary" @click="remove">Effacer</button>
+</div>
+
+    <div class="modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Euh...</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>... cette fonctionnalité n'est pas encore implémentée !</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+                </div>
             </div>
         </div>
-
     </div>
 
 </div>
@@ -181,14 +220,17 @@
             isTelInError(e) {
                 console.log(this.tel)
                 return this.tel.length !== 9;
+            },
+            isBtnDisabled() {
+                return (this.nickname === '' || this.name === '' || this.address === '' || this.tel === '')
             }
         },
         methods: {
             tel_formated() {
                 let res = "(+" + countries[this.selectedIndex].callingCodes[0] + ") ";
-                if(this.tel !== '') {
+                if ( this.tel !== '' ) {
                     res += this.tel.substring(0, 1);
-                    if(this.tel.substring(1) !== '') {
+                    if ( this.tel.substring(1) !== '' ) {
                         let myData = this.tel.substring(1).match(/.{1,2}/g);
                         res += " " + myData.join(' ');
                     }
@@ -198,13 +240,13 @@
             tel_changed(event) {
                 let data = event.data
                 console.log(data);
-                if(data === null){
+                if ( data === null ) {
                     this.tel = " ";
                     this.tel = "";
                     return;
                 }
                 data = data.replaceAll(/[^0-9]*/g, "");
-                if(data === "") {
+                if ( data === "" ) {
                     this.tel = " ";
                     this.tel = "";
                     return;
@@ -213,6 +255,16 @@
             },
             get_countries() {
                 return countries;
+            },
+            save() {
+                (new bootstrap.Modal('.modal')).show()
+            },
+            remove() {
+                this.nickname = '';
+                this.name = '';
+                this.address = '';
+                this.selectedIndex = 0;
+                this.tel = '';
             }
         }
     }
