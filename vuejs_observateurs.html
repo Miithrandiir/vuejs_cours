@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Observateur</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <style>
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+
+        .appear {
+            animation: fadeIn 500ms ease-in-out forwards;
+        }
+
+        .disappear {
+            animation: fadeOut 500ms ease-in-out;
+            animation-fill-mode: forwards;
+            animation-iteration-count: 1;
+        }
+
+        .form-group {
+            display: flex;
+            align-items: center;
+        }
+
+        label {
+            margin-right: 1em;
+        }
+    </style>
+</head>
+<body>
+<div id="app-watch">
+    <div class="form-group">
+        <label>g</label>
+        <input type="number" class="form-control" v-model="g"/>
+    </div>
+    <div class="form-group">
+        <label>Kg</label>
+        <input type="number" class="form-control" v-model="kg"/>
+    </div>
+
+    <div style="height: 6em; border: 1px solid lightgrey">
+        <div id="msg" style="font-size: 4em; opacity: 0">
+            {{ conclusion }}
+        </div>
+    </div>
+
+</div>
+
+
+<script type="module">
+
+
+    Vue.createApp({
+        data() {
+            return {
+                g: '',
+                kg: ''
+            }
+        },
+        computed: {
+            conclusion() {
+                return this.kg < 100 ? "Trop Léger .." : "Wow, c'est lourd !";
+            }
+        },
+        watch: {
+            kg: function (newValue, oldValue) {
+                this.g = newValue * 1000;
+            },
+            g: function (newValue, oldValue) {
+                this.kg = newValue / 1000;
+            },
+            conclusion() {
+                console.log('Changé');
+                this.flashMsg();
+            }
+        },
+        methods: {
+            flashMsg() {
+                document.querySelector('#msg').classList.toggle('appear');
+                setTimeout(() => {
+                    document.querySelector('#msg').classList.toggle('appear');
+                    document.querySelector('#msg').classList.toggle('disappear');
+                    setTimeout(() => {
+                        document.querySelector('#msg').classList.toggle('disappear');
+
+                    }, 500);
+                }, 500)
+            }
+        }
+    }).mount('#app-watch');
+
+</script>
+</body>
+</html>

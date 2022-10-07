@@ -117,7 +117,7 @@
         <div class="input-group">
             <label>Pays</label>
             <select v-model="selectedIndex">
-                <option v-for="(data, index) in countries" :key="data.name" :value="index">
+                <option v-for="(data, index) in get_countries()" :key="data.name" :value="index">
                     {{ data.name }}
                 </option>
             </select>
@@ -155,25 +155,8 @@
 
 </div>
 
-<script>
-    const data = [
-        {
-            "name": "France",
-            "callingCodes": ["33"]
-        },
-        {
-            "name": "Belgium",
-            "callingCodes": ["32"]
-        },
-        {
-            "name": "Germany",
-            "callingCodes": ["49"]
-        },
-        {
-            "name": "United States of America",
-            "callingCodes": ["1"],
-        },
-    ]
+<script type="module">
+    import {countries} from "./sample_countries.js";
 
     const tp1 = {
         data() {
@@ -182,13 +165,12 @@
                 name: '',
                 address: '',
                 selectedIndex: 0,
-                countries: data,
                 tel: ''
             }
         },
         computed: {
             country() {
-                return this.countries[this.selectedIndex].name;
+                return countries[this.selectedIndex].name;
             },
             isNicknameInError() {
                 return this.nickname === "";
@@ -203,7 +185,7 @@
         },
         methods: {
             tel_formated() {
-                let res = "(+" + this.countries[this.selectedIndex].callingCodes[0] + ") ";
+                let res = "(+" + countries[this.selectedIndex].callingCodes[0] + ") ";
                 if(this.tel !== '') {
                     res += this.tel.substring(0, 1);
                     if(this.tel.substring(1) !== '') {
@@ -228,6 +210,9 @@
                     return;
                 }
                 this.tel += data;
+            },
+            get_countries() {
+                return countries;
             }
         }
     }
