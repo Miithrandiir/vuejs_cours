@@ -203,7 +203,15 @@
         },
         methods: {
             tel_formated() {
-                return "(+" + this.countries[this.selectedIndex].callingCodes[0] + ") " + this.tel;
+                let res = "(+" + this.countries[this.selectedIndex].callingCodes[0] + ") ";
+                if(this.tel !== '') {
+                    res += this.tel.substring(0, 1);
+                    if(this.tel.substring(1) !== '') {
+                        let myData = this.tel.substring(1).match(/.{1,2}/g);
+                        res += " " + myData.join(' ');
+                    }
+                }
+                return res;
             },
             tel_changed(event) {
                 let data = event.data
